@@ -1,0 +1,7 @@
+github "ibm-bluemix-mobile-services/bms-clientsdk-swift-analytics-api" "2.2.3"
+github "daltoniam/common-crypto-spm" "1.1.0"
+github "daltoniam/zlib-spm" "1.1.0"
+github "ibm-bluemix-mobile-services/bms-clientsdk-swift-core" "2.3.5"
+github "daltoniam/Starscream" "3.0.4"
+github "ibm-bluemix-mobile-services/bms-clientsdk-swift-push" "5249d3b80ff1541ccef966b74273b798e8883720"
+github "watson-developer-cloud/swift-sdk" "v0.21.0"

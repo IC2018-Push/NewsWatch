@@ -1,0 +1,43 @@
+PODS:
+  - AIFlatSwitch (1.0.2)
+  - DropDown (2.3.1)
+  - FoldingCell (3.0.3)
+  - HGPlaceholders (0.3.0)
+  - OpenWhisk (0.2.2)
+  - Persei (3.1.1)
+  - SwiftMessages (4.1.0)
+  - VegaScrollFlowLayout (1.1)
+
+DEPENDENCIES:
+  - AIFlatSwitch (~> 1.0.1)
+  - DropDown
+  - FoldingCell
+  - HGPlaceholders
+  - OpenWhisk (from `https://github.com/openwhisk/openwhisk-client-swift.git`, tag `0.2.2`)
+  - Persei (~> 3.0)
+  - SwiftMessages
+  - VegaScrollFlowLayout
+
+EXTERNAL SOURCES:
+  OpenWhisk:
+    :git: https://github.com/openwhisk/openwhisk-client-swift.git
+    :tag: 0.2.2
+
+CHECKOUT OPTIONS:
+  OpenWhisk:
+    :git: https://github.com/openwhisk/openwhisk-client-swift.git
+    :tag: 0.2.2
+
+SPEC CHECKSUMS:
+  AIFlatSwitch: 5ab22806eeff3e09d585c2f13d22bfa6e3427191
+  DropDown: 20499c7b2731b0d21609af924e47c7677a2be50d
+  FoldingCell: 76ce5d1ddba34c6d25548b473b7b51585e992da0
+  HGPlaceholders: 2df01c51b04a30acd0b8c9c7161c7cdde4541109
+  OpenWhisk: 68be4ee6ca258051ee99323bd736317e550d1cf8
+  Persei: 6d36b54e40eccd437211548d3f897269c85d3a13
+  SwiftMessages: 1bacc783c8f10bdfdc57c14860cae8a1f1fa6591
+  VegaScrollFlowLayout: 9158061f29179147755f937c2b21693fc5dbbac3
+
+PODFILE CHECKSUM: 0ea4e0638cf71d74dce9445b2506a723bfa3f18e
+
+COCOAPODS: 1.4.0

@@ -1,0 +1,12 @@
+use_frameworks!
+
+target 'NewsSeconds' do
+     pod 'OpenWhisk', :git => 'https://github.com/openwhisk/openwhisk-client-swift.git', :tag => '0.2.2'
+     pod 'DropDown'
+     pod 'SwiftMessages'
+     pod 'AIFlatSwitch', '~> 1.0.1'
+     pod 'VegaScrollFlowLayout'
+     pod 'FoldingCell'
+     pod 'HGPlaceholders'
+     pod 'Persei', '~> 3.0'
+end

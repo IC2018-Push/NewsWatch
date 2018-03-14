@@ -1,0 +1,2 @@
+github "watson-developer-cloud/swift-sdk"
+github "ibm-bluemix-mobile-services/bms-clientsdk-swift-push" "master"
