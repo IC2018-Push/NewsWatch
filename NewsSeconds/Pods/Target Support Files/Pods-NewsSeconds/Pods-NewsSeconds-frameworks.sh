@@ -135,22 +135,32 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AIFlatSwitch/AIFlatSwitch.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/BMSAnalyticsAPI/BMSAnalyticsAPI.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/BMSCore/BMSCore.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/CDAlertView/CDAlertView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FoldingCell/FoldingCell.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/HGPlaceholders/HGPlaceholders.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/IBMAppLaunch/IBMAppLaunch.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/OpenWhisk/OpenWhisk.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Persei/Persei.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/VegaScrollFlowLayout/VegaScrollFlowLayout.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AIFlatSwitch/AIFlatSwitch.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/BMSAnalyticsAPI/BMSAnalyticsAPI.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/BMSCore/BMSCore.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/CDAlertView/CDAlertView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FoldingCell/FoldingCell.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/HGPlaceholders/HGPlaceholders.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/IBMAppLaunch/IBMAppLaunch.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/OpenWhisk/OpenWhisk.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Persei/Persei.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/VegaScrollFlowLayout/VegaScrollFlowLayout.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

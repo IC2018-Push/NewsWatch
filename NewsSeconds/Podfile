@@ -9,4 +9,6 @@ target 'NewsSeconds' do
      pod 'FoldingCell'
      pod 'HGPlaceholders'
      pod 'Persei', '~> 3.0'
+     pod 'IBMAppLaunch'
+     pod "CDAlertView"
 end

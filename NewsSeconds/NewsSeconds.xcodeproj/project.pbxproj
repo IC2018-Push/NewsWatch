@@ -30,7 +30,11 @@
 		1850EEF51ED58D1A00DC29A8 /* BMSPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1850EEED1ED58D1A00DC29A8 /* BMSPush.framework */; };
 		1850EEF61ED58D1A00DC29A8 /* BMSPush.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1850EEED1ED58D1A00DC29A8 /* BMSPush.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		185C93EA1EACE9060077462E /* bluemixCredentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 185C93E91EACE9060077462E /* bluemixCredentials.plist */; };
+		18ED18AE205A886F005A208A /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ED18AD205A886F005A208A /* NewsTableViewCell.swift */; };
+		18ED18B0205A88A2005A208A /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ED18AF205A88A2005A208A /* NewsTableViewController.swift */; };
+		18ED18B2205A88BD005A208A /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ED18B1205A88BD005A208A /* ArticleViewController.swift */; };
 		18FEC31D20586E8400C6FC19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18FEC31C20586E8400C6FC19 /* Assets.xcassets */; };
+		18FEC31F20598DA500C6FC19 /* LanguageEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FEC31E20598DA500C6FC19 /* LanguageEnum.swift */; };
 		E105CD7F7C0B3DE5C75A87D2 /* Pods_NewsSeconds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48881D7CF6A71CE7218FE71F /* Pods_NewsSeconds.framework */; };
 /* End PBXBuildFile section */
 
@@ -98,7 +102,11 @@
 		1850EEEC1ED58D1A00DC29A8 /* BMSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BMSCore.framework; path = Carthage/Build/iOS/BMSCore.framework; sourceTree = "<group>"; };
 		1850EEED1ED58D1A00DC29A8 /* BMSPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BMSPush.framework; path = Carthage/Build/iOS/BMSPush.framework; sourceTree = "<group>"; };
 		185C93E91EACE9060077462E /* bluemixCredentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bluemixCredentials.plist; sourceTree = "<group>"; };
+		18ED18AD205A886F005A208A /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
+		18ED18AF205A88A2005A208A /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
+		18ED18B1205A88BD005A208A /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		18FEC31C20586E8400C6FC19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
+		18FEC31E20598DA500C6FC19 /* LanguageEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageEnum.swift; sourceTree = "<group>"; };
 		48881D7CF6A71CE7218FE71F /* Pods_NewsSeconds.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NewsSeconds.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FD35C0F37BC1F05C7ACADA4 /* Pods-NewsSeconds.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsSeconds.release.xcconfig"; path = "Pods/Target Support Files/Pods-NewsSeconds/Pods-NewsSeconds.release.xcconfig"; sourceTree = "<group>"; };
 		9F47152D8FA6F4DA49C7D2FE /* Pods-NewsSeconds.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsSeconds.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NewsSeconds/Pods-NewsSeconds.debug.xcconfig"; sourceTree = "<group>"; };
@@ -215,6 +223,10 @@
 				1456BE291E67F4BD00060546 /* MainTableViewController.swift */,
 				1456BE511E68A2D100060546 /* SettingsViewController.swift */,
 				1456BE4A1E67F57B00060546 /* ActionCell.swift */,
+				18FEC31E20598DA500C6FC19 /* LanguageEnum.swift */,
+				18ED18AD205A886F005A208A /* NewsTableViewCell.swift */,
+				18ED18AF205A88A2005A208A /* NewsTableViewController.swift */,
+				18ED18B1205A88BD005A208A /* ArticleViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -410,23 +422,33 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-NewsSeconds/Pods-NewsSeconds-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AIFlatSwitch/AIFlatSwitch.framework",
+				"${BUILT_PRODUCTS_DIR}/BMSAnalyticsAPI/BMSAnalyticsAPI.framework",
+				"${BUILT_PRODUCTS_DIR}/BMSCore/BMSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/CDAlertView/CDAlertView.framework",
 				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
 				"${BUILT_PRODUCTS_DIR}/FoldingCell/FoldingCell.framework",
 				"${BUILT_PRODUCTS_DIR}/HGPlaceholders/HGPlaceholders.framework",
+				"${BUILT_PRODUCTS_DIR}/IBMAppLaunch/IBMAppLaunch.framework",
 				"${BUILT_PRODUCTS_DIR}/OpenWhisk/OpenWhisk.framework",
 				"${BUILT_PRODUCTS_DIR}/Persei/Persei.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/VegaScrollFlowLayout/VegaScrollFlowLayout.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AIFlatSwitch.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BMSAnalyticsAPI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BMSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CDAlertView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FoldingCell.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HGPlaceholders.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IBMAppLaunch.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenWhisk.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Persei.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VegaScrollFlowLayout.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -442,12 +464,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				1456BE2A1E67F4BD00060546 /* MainTableViewController.swift in Sources */,
+				18FEC31F20598DA500C6FC19 /* LanguageEnum.swift in Sources */,
 				1456BE571E68A6D100060546 /* MyDropDownCell.swift in Sources */,
 				1456BE281E67F4BD00060546 /* AppDelegate.swift in Sources */,
 				1456BE501E689D4C00060546 /* paperSwitch.swift in Sources */,
+				18ED18B2205A88BD005A208A /* ArticleViewController.swift in Sources */,
 				1456BE4B1E67F57B00060546 /* ActionCell.swift in Sources */,
 				1456BE491E67F53100060546 /* FoldingCell.swift in Sources */,
 				1456BE521E68A2D100060546 /* SettingsViewController.swift in Sources */,
+				18ED18B0205A88A2005A208A /* NewsTableViewController.swift in Sources */,
+				18ED18AE205A886F005A208A /* NewsTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

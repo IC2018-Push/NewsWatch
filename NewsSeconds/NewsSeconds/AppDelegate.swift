@@ -14,6 +14,8 @@ import AVFoundation
 import TextToSpeechV1
 import UserNotifications
 import UserNotificationsUI
+import IBMAppLaunch
+import CDAlertView
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate,AVAudioPlayerDelegate {
@@ -27,16 +29,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate,AVAudioPlayerDelegate {
 
      //Push Service Credentials
     var pushAppGUID:String = "Your push appGUID"
-    var pushAppClientSecret:String = "Your push appSecret"
+    var pushAppClientSecret:String = "Your push client Secret"
     var pushAppRegion:String = "Your push appregion"
+    
+    //AppLaunch Service Credentials
+    var appLaunchAppID:String = "Your AppLaunch appGUID"
+    var appLaunchClientSecret:String = "Your AppLaunch client Secret"
     
     //Watson Text-to-speech credentials
     var watsonTextToSpeachUsername:String = "Watson Text to Speech username"
     var watsonTextToSpeachPassword:String = "Watson Text to Speech password"
-    
-   // http://webhose.io/filterWebContent?token=7a563830-7222-466c-8b84-ca23b29aab8f&format=json&sort=crawled&q=%22donald%20trump%22%20language%3Aenglish
-    //News webhose.io API key - From https://webhose.io/
-    var newsAPIKey:String = "7a563830-7222-466c-8b84-ca23b29aab8f"
 
     
     weak var gameTimer: Timer?
@@ -46,14 +48,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate,AVAudioPlayerDelegate {
     
     var urlToOpen:String = UserDefaults.standard.value(forKey: "urlToOpen") != nil ?  UserDefaults.standard.value(forKey: "urlToOpen") as! String : ""
 
-    var sourceDescription:String = UserDefaults.standard.value(forKey: "sourceDescription") != nil ?  UserDefaults.standard.value(forKey: "sourceDescription") as! String : "International news"
+    var sourceDescription:String = UserDefaults.standard.value(forKey: "sourceDescription") != nil ?  UserDefaults.standard.value(forKey: "sourceDescription") as! String : "sports"
 
-    var source:String = UserDefaults.standard.value(forKey: "sourceValue") != nil ?  UserDefaults.standard.value(forKey: "sourceValue") as! String : "International news"
+    var source:String = UserDefaults.standard.value(forKey: "sourceValue") != nil ?  UserDefaults.standard.value(forKey: "sourceValue") as! String : "sports"
     var sourceID:Int = UserDefaults.standard.value(forKey: "sourceValueID") != nil ?  UserDefaults.standard.integer(forKey:"sourceValueID")  : 0
-    var oldSource:String = UserDefaults.standard.value(forKey: "oldSourceValue") != nil ?  UserDefaults.standard.value(forKey: "oldSourceValue") as! String :"International news"
+    var oldSource:String = UserDefaults.standard.value(forKey: "oldSourceValue") != nil ?  UserDefaults.standard.value(forKey: "oldSourceValue") as! String :"sports"
+    var oldLanguage:String = UserDefaults.standard.value(forKey: "oldLanguage") != nil ?  UserDefaults.standard.value(forKey: "oldLanguage") as! String :"English"
     
-    var language:String = "english"
-    var location:String = "New York"
+    var language:String = UserDefaults.standard.value(forKey: "language") != nil ?  UserDefaults.standard.value(forKey: "language") as! String : String(describing: LanguageEnum(rawValue: NSLocale.current.languageCode!)!)
+    var location:String = "Bangalore"
+    
     
     var valueChanged:Bool = false
     var doIt = false
@@ -63,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,AVAudioPlayerDelegate {
          doIt = false
         
         
-        
+        UIApplication.shared.statusBarStyle = .lightContent
         if let path = Bundle.main.path(forResource: "bluemixCredentials", ofType: "plist"), let dict = NSDictionary(contentsOfFile: path) as? [String: AnyObject] {
             // use swift dictionary as normal
             
@@ -75,8 +79,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,AVAudioPlayerDelegate {
             pushAppClientSecret = dict["pushAppClientSecret"] as! String;
             pushAppRegion = dict["pushAppRegion"] as! String;
             watsonTextToSpeachUsername = dict["watsonTextToSpeachUsername"] as! String;
-            watsonTextToSpeachPassword = dict["watsonTextToSpeachPassword"] as! String;
-            newsAPIKey = dict["newsAPIKey"] as! String;
+            watsonTextToSpeachPassword = dict["watsonTextToSpeachPassword"] as! String;            
+            appLaunchAppID = dict["appLaunchAppID"] as! String;
+            appLaunchClientSecret = dict["appLaunchClientSecret"] as! String;
         }
 
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
@@ -90,7 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,AVAudioPlayerDelegate {
         if (UserDefaults.standard.bool(forKey: "isPushEnabled")){
             registerForPush()
         }
-        
+        registerForAppLaunch(subcriptionType: "demoNews")
         gameTimer?.invalidate()
         let ff = Date()
         
@@ -103,6 +108,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate,AVAudioPlayerDelegate {
         return true
     }
     
+    func registerForAppLaunch(subcriptionType: String) {
+        let config = AppLaunchConfig.Builder().fetchPolicy(.REFRESH_ON_EVERY_START).eventFlushInterval(50).deviceID("iOSDeviceID").build()
+        let user = AppLaunchUser.Builder(userId: "demouser2").custom(key: "UserType", stringValue: subcriptionType).build()
+        AppLaunch.sharedInstance.initialize(region: .US_SOUTH, appId: appLaunchAppID, clientSecret: appLaunchClientSecret, config: config, user: user) { (success, failure) in
+            if success != nil {
+                print("AppLaunch Successfully initialized")
+                
+            } else {
+                print("Error")
+            }
+        }
+    }
+    
+    func showOffer(_ text:String) {
+        let alert = CDAlertView(title: "Exclusively for today!", message: text, type: .notification)
+        let doneAction = CDAlertViewAction(title: "Sure! 💪")
+        alert.add(action: doneAction)
+        let nevermindAction = CDAlertViewAction(title: "Nevermind 😑")
+        alert.add(action: nevermindAction)
+        alert.show()
+    }
     func registerForPush () {
         
         let myBMSClient = BMSClient.sharedInstance
@@ -137,7 +163,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,AVAudioPlayerDelegate {
             
             let push =  BMSPushClient.sharedInstance
             
-            push.unsubscribeFromTags(tagsArray: [self.oldSource]) { (response, status, error) in
+            push.unsubscribeFromTags(tagsArray: [self.oldSource, self.oldLanguage]) { (response, status, error) in
                 
                 if error.isEmpty {
                     
@@ -145,7 +171,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,AVAudioPlayerDelegate {
                     
                     print( "status code during device Unsubscribing : \(String(describing: status))")
                     
-                    push.subscribeToTags(tagsArray: [self.source]) { (response, status, error) in
+                    push.subscribeToTags(tagsArray: [self.source, self.language]) { (response, status, error) in
                         
                         if error.isEmpty {
                             print( "Response during device subscription : \(String(describing: response))")
@@ -182,7 +208,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,AVAudioPlayerDelegate {
                 self.showAlert(title: "Awesome !!", message: "Successfully registratered for push notifications", theme: .success)
 
                 
-                push.subscribeToTags(tagsArray: [self.source]) { (response, status, error) in
+                push.subscribeToTags(tagsArray: [self.source, self.language]) { (response, status, error) in
                     
                     if error.isEmpty {
                         

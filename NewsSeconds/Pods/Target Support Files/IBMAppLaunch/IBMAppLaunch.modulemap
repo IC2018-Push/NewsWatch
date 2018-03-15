@@ -1,0 +1,6 @@
+framework module IBMAppLaunch {
+  umbrella header "IBMAppLaunch-umbrella.h"
+
+  export *
+  module * { export * }
+}

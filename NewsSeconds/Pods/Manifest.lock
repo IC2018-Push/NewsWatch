@@ -1,18 +1,28 @@
 PODS:
   - AIFlatSwitch (1.0.2)
+  - BMSAnalyticsAPI (2.2.3)
+  - BMSCore (2.3.5):
+    - BMSAnalyticsAPI (~> 2.2)
+  - CDAlertView (0.7.1)
   - DropDown (2.3.1)
   - FoldingCell (3.0.3)
   - HGPlaceholders (0.3.0)
+  - IBMAppLaunch (1.1.6):
+    - BMSCore (~> 2.0)
+    - SwiftyJSON (~> 4.0.0)
   - OpenWhisk (0.2.2)
   - Persei (3.1.1)
   - SwiftMessages (4.1.0)
+  - SwiftyJSON (4.0.0)
   - VegaScrollFlowLayout (1.1)
 
 DEPENDENCIES:
   - AIFlatSwitch (~> 1.0.1)
+  - CDAlertView
   - DropDown
   - FoldingCell
   - HGPlaceholders
+  - IBMAppLaunch
   - OpenWhisk (from `https://github.com/openwhisk/openwhisk-client-swift.git`, tag `0.2.2`)
   - Persei (~> 3.0)
   - SwiftMessages
@@ -30,14 +40,19 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AIFlatSwitch: 5ab22806eeff3e09d585c2f13d22bfa6e3427191
+  BMSAnalyticsAPI: d259379069bb11d2ff365bf5b796a2677dfc3849
+  BMSCore: 446c16a7dbe14b5019751617a00dd947c65cca82
+  CDAlertView: 0e5597633e46bcf09c8b3ad67bc23e184f7e4075
   DropDown: 20499c7b2731b0d21609af924e47c7677a2be50d
   FoldingCell: 76ce5d1ddba34c6d25548b473b7b51585e992da0
   HGPlaceholders: 2df01c51b04a30acd0b8c9c7161c7cdde4541109
+  IBMAppLaunch: 9df02ef7f646121befceaf9dd22a4380a5dee60d
   OpenWhisk: 68be4ee6ca258051ee99323bd736317e550d1cf8
   Persei: 6d36b54e40eccd437211548d3f897269c85d3a13
   SwiftMessages: 1bacc783c8f10bdfdc57c14860cae8a1f1fa6591
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   VegaScrollFlowLayout: 9158061f29179147755f937c2b21693fc5dbbac3
 
-PODFILE CHECKSUM: 0ea4e0638cf71d74dce9445b2506a723bfa3f18e
+PODFILE CHECKSUM: cb9224b1bcf94df51094a420a73a79b61cbcc6c2
 
 COCOAPODS: 1.4.0
