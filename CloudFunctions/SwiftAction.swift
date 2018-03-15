@@ -1,38 +1,3 @@
-////: Playground - noun: a place where people can play
-//
-//import UIKit
-//
-//var str = "Hello, playground"
-//
-//
-// var dateString = "2018-03-10T18:51:00.000+02:00"
-//dateString = String(dateString[dateString.startIndex..<dateString.index(dateString.startIndex, offsetBy: 19)]) // prints: ful
-//
-//    let dateFormatter = DateFormatter()
-//    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-//    dateFormatter.locale = Locale.init(identifier: "en_GB")
-//    let dateObj = dateFormatter.date(from: dateString)
-//
-//    dateFormatter.dateFormat = "hh:mm a"
-//    let hjksfdf = (dateFormatter.string(from: dateObj!))
-//
-////
-////    let calendar = NSCalendar.autoupdatingCurrent
-////    let someDate:Date = dateObj!
-////    if calendar.isDateInYesterday(someDate as Date) {
-////        let jfskhdfjsd = "Yesterday"
-////    }
-////    else if calendar.isDateInToday(someDate as Date) {
-////        let sk = "Today"
-////    }
-////    else{
-////        dateFormatter.dateFormat = "MMM dd yyyy"
-////        let kjkhj = (dateFormatter.string(from: dateObj!))
-////    }
-//
-
-
-
 /**
  *
  * main() will be invoked when you Run This Action.
@@ -52,26 +17,96 @@ import KituraNet
 import Foundation
 import SwiftyJSON
 
-func main(args: [String:Any]) -> [String:Any] {
+//Push Service credentials
+let appSecret = " PuPush Servicsh AppSecret"
+let clientSecret = "Push Servic Clientsecret"
+let appID = "Push Servich appGUID"
+let appRegion = "push App region"  
+
+// Watson translator Credentials
+let translatorUsername = "Watson translator username"
+let translatorPassword = "Watson translator password"
+
+//News API Key
+let newsAPIKey = "7a563830-7222-466c-8b84-ca23b29aab8f"
+
+public enum LanguageEnum: String {
     
+    case en = "English", es = "Spanish", ko = "Korean", nl = "Dutch", fr = "French", it = "Italian", de = "German", js = "Japanese", zh = "Chinese", tr = "Turkish", pl = "Polish", pt = "Portuguese", ru = "Russian", ar = "Arabic"
     
-    //Add Your credentials
-    let appSecret = "b6bf9b02-261a-4e3b-bbe2-886aacabf959"
-    let appID = "21e0805e-f57c-4077-a5f9-172a2ca0b451"
-    let appRegion = ".ng.bluemix.net"
-    
-    let newsAPIKey = "7a563830-7222-466c-8b84-ca23b29aab8f"
-    
-    
-    var str = 0
-    var values = 0
-    
-    var requestOptions: [ClientRequest.Options] = []
+}
+func getTranslated(txt: String, toLanguage:String) -> String {
+  if (!txt.isEmpty){
+      let toLang = String(describing: LanguageEnum(rawValue: toLanguage)!)
+  let invokeResult = Whisk.invoke(actionNamed:"/whisk.system/watson-translator/translator",withParameters:["username":translatorUsername,"password":translatorPassword,"payload":txt,"translateFrom":"en","translateTo":toLang])
+  let dateActivation = JSON(invokeResult)   
+  return(dateActivation["response"]["result"]["payload"].string)!
+  } else {
+      return ""
+  }
+}
+
+func getNews(tag:String) -> JSON {
+
+    var response1:JSON = [:]
+    var url = "/filterWebContent?token="+newsAPIKey+"&format=json&ts=1520889786731&sort=relevancy&q="+tag
+    var requestOptions1: [ClientRequest.Options] = []
+    requestOptions1.append(.method("GET"))
+    requestOptions1.append(.schema("https://"))
+    requestOptions1.append(.hostname("webhose.io"))
+    requestOptions1.append(.path(url))
+    let req1 = HTTP.request(requestOptions1) { resp in
+        do {
+            var body = Data()
+            try resp?.readAllData(into: &body)
+            response1 = JSON(data: body)
+            // response1 = response1["posts"]
+            // if response1.count > 0  {
+            //     let j = response1[0]["thread"]                
+            //     let messages = j["title"].stringValue
+            //     let description = j["title_full"].stringValue
+            //     let newsURL = response1[0]["url"].stringValue;
+            //     let dd = ["data":description,"newsURL":newsURL]
+
+            // }
+        } catch {
+            print("Error get message")
+        }
+    }
+    req1.end()
+
+    return response1
+}
+
+func sendNotification(newsTag: String, languageTag:String, devices:[String]) {
+
+   var neswjson = getNews(tag:newsTag);
+   neswjson = neswjson["posts"]
+    if neswjson.count > 0  {
+        let j = neswjson[0]["thread"]                
+        var messages = j["title"].stringValue
+        var description = j["title_full"].stringValue
+        let newsURL = neswjson[0]["url"].stringValue;        
+        if (languageTag != "English") {
+           messages = getTranslated(txt: messages, toLanguage:languageTag)
+           description = getTranslated(txt: description, toLanguage:languageTag)
+        }
+        let dd = ["data":description,"newsURL":newsURL]
+
+        let resss = Whisk.invoke(actionNamed:"/whisk.system/pushnotifications/sendMessage",withParameters:["appSecret":appSecret,"appId":appID,"text":messages,"apnsPayload":dd,"apnsType":"MIXED","deviceIds":devices])
+        print(resss)
+    }
+}
+
+func getDevices(tag : String) -> [String] {
+
+var devices = [String]()
+var requestOptions: [ClientRequest.Options] = []
     requestOptions.append(.method("GET"))
     requestOptions.append(.schema("https://"))
     requestOptions.append(.hostname("imfpush\(appRegion)"))
-    requestOptions.append(.path("/imfpush/v1/apps/\(appID)/tags"))
-    requestOptions.append(.headers(["appSecret":appSecret]))
+    requestOptions.append(.path("/imfpush/v1/apps/\(appID)/subscriptions?expand=false&tagName=\(tag)"))
+    requestOptions.append(.headers(["clientSecret":clientSecret]))
     
     
     let req = HTTP.request(requestOptions) { resp in
@@ -80,46 +115,15 @@ func main(args: [String:Any]) -> [String:Any] {
                 var body = Data()
                 try resp.readAllData(into: &body)
                 let response = JSON(data: body)
-                str = response["tags"].count
-                str = str - 1
+                let tagsRes = response["subscriptions"]
+                if tagsRes.count > 0 {
+                    for (index, threads) in tagsRes {
+
+                         let j = threads["deviceId"].stringValue  
+                         devices.append(j);
+                }
+                }
                 
-                while(str>=0){
-                    let tag =  response["tags"][str]["name"].string
-                    var url = "/filterWebContent?token="+newsAPIKey+"&format=json&ts=1520889786731&sort=relevancy&q="+tag!
-                    var requestOptions1: [ClientRequest.Options] = []
-                    requestOptions1.append(.method("GET"))
-                    requestOptions1.append(.schema("https://"))
-                    requestOptions1.append(.hostname("webhose.io"))
-                    requestOptions1.append(.path(url))
-                    str = str - 1;
-                    
-                    let req1 = HTTP.request(requestOptions1) { resp in
-                        
-                        do {
-                            var body = Data()
-                            try resp?.readAllData(into: &body)
-                            var response1 = JSON(data: body)
-                            response1 = response1["posts"]
-                            if response1.count > 0  {
-                                let j = response1[0]["thread"]
-                                
-                                print(j["title_full"].stringValue)
-                                
-                                let messages = j["title"].stringValue
-                                let description = j["title_full"].stringValue
-                                let newsURL = response1[0]["url"].stringValue;
-                                let dd = ["data":description,"newsURL":newsURL]
-                                let resss = Whisk.invoke(actionNamed:"/whisk.system/pushnotifications/sendMessage",withParameters:["appSecret":appSecret,"appId":appID,"text":messages,"apnsPayload":dd,"apnsType":"MIXED","tagNames":[tag!]])
-                                print(resss)
-                                
-                            }
-                        } catch {
-                            print("Error ")
-                        }
-                    }
-                    req1.end()
-                    }
-                    
                 } catch {
                     print("Error parsing JSON fromresponse")
                 }
@@ -134,6 +138,62 @@ func main(args: [String:Any]) -> [String:Any] {
         }
         
         req.end()
+        return devices
+}
+
+func main(args: [String:Any]) -> [String:Any] {
+    
+    
+    //Add Your credentials
+     
+    
+    let languageTags = [
+            "English",
+            "Spanish",
+            "Korean",
+            "Dutch",
+            "French",
+            "Italian",
+            "German",
+            "Japanese",
+            "Chinese",
+            "Turkish",
+            "Polish",
+            "Portuguese",
+            "Russian",
+            "Arabic"
+        ];
+
+    let newsTags = [
+            "finance",
+            "sports",
+            "investments",
+            "politics",
+            "Entertainment",
+            "Health",
+            "Education",
+            "Arts",
+            "culture",
+            "Science",
+            "technology"
+        ]
+
+
+  //let  values = getDevices(tag:"Spanish");
+    
+  for newsTag in newsTags {
         
-        return [ "greeting" : values ]
+        let  values = getDevices(tag:newsTag);
+        if (values.count > 0) {
+            for languageTag in languageTags {
+   
+           let  values1 = getDevices(tag:languageTag);
+           if (values1.count > 0) {
+               let devices = values1.filter{ values.contains($0) }
+               sendNotification(newsTag:newsTag, languageTag:languageTag, devices:devices)
+           }
+        }
+        }        
+  }
+        return [ "greeting" : "th" ]
 }
