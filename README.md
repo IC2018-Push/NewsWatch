@@ -102,44 +102,15 @@ Go to [Cloud Functions Web editor](https://console.ng.bluemix.net/openwhisk/edit
 
  ```
   {
-    {
-     "name": "International news",
-     "description": "International news"
-     },
-   {
-     "name": "finance",
-     "description": "finance related news"
-     },
-   {
-     "name": "sports",
-      "description": "sports related news"
-   },
-   {
-     "name": "politics",
-     "description": "politics related news"
-   },
-   {
-     "name": "Entertainment",
-      "description": "Entertainment related news"
-   },
-   {
-     "name": "Health",
-      "description": "Health related news"
-   },
-   {
-     "name": "Education",
-      "description": "Education related news"
-   },
-   {
-     "name": "Arts and culture",
-      "description": "Arts and culture related news"
-   },
-   {
-     "name": "Science and technology",
-      "description": "Science and technology related news"
-   }
+    "finance", "sports", "investments", "politics", "Entertainment", "Health","Education", "Arts", "culture", "Science","technology"
   }
  ```
+ ``
+  {
+    "English","Spanish","Korean", "Dutch","French","Italian","German", "Japanese", "Chinese", "Turkish", "Polish", "Portuguese", "Russian","Arabic"
+  }
+ ```
+ 
 
 ## Run iOS application.
 
