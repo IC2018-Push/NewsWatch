@@ -23,6 +23,14 @@
   2. Click on [Catalog](https://console.ng.bluemix.net/catalog/) on the top bar. On the left pane click on `Watson` below `Services`.Create a `Watson Text to speech` service.
 
       <img src="Assets/watson.png" width="300" height="120">
+  
+  3. Create a `Watson Language Translator`.
+
+        <img src="Assets/lantrans.png" width="300" height="150">
+
+  4. Create a `App Launch` Service.
+
+      <img src="Assets/appl.png" width="300" height="120">
 
 ## Create APNS Certificate
 
@@ -113,6 +121,7 @@ Go to [Cloud Functions Web editor](https://console.ng.bluemix.net/openwhisk/edit
 ## Run iOS application.
 
   Run the iOS application . Go to settings page and enable `Push notifications`, `Play push notifications`. Select your favorite news channel from the dropdown.
+
 
 Thats it folks !!!..
 
