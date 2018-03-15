@@ -1,8 +1,8 @@
 # NewsWatch
 
-  NewsWatch is an example iOS application that uses IBM Cloud Push Notification service, Cloud Functions, Cloudant and Watson Text to Speech service.
+  NewsWatch is an example iOS application that uses IBM Cloud Push Notification service, Applaunch, Cloud Functions, Cloudant and Watson Text to Speech  and Translation service.
 
-  NewsWatch will will send give you latest news based on your preference and location. Once you subscribe for your interested topic , you will rceive a push notification every hour with the latest news. If you don't want to miss out the latest news you can enable the `Play Push Notification` option in the app to readout the news.
+  NewsWatch will will send give you latest news based on your preference and location. Once you subscribe for your interested topic , you will rceive a push notification every hour with the latest news. If you don't want to miss out the latest news you can enable the `Play Push Notification` option in the app to readout the news. This app will show you ho to use AppLaunch service to change the UI elements.
 
 
    <img src="Assets/arch.png" width="700" height="400">
@@ -101,14 +101,12 @@ Go to [Cloud Functions Web editor](https://console.ng.bluemix.net/openwhisk/edit
  Create the following tags in push service
 
  ```
-  {
+  // News type tags
     "finance", "sports", "investments", "politics", "Entertainment", "Health","Education", "Arts", "culture", "Science","technology"
-  }
- ```
- ``
-  {
+
+ // language Tags
     "English","Spanish","Korean", "Dutch","French","Italian","German", "Japanese", "Chinese", "Turkish", "Polish", "Portuguese", "Russian","Arabic"
-  }
+  
  ```
  
 
