@@ -29,7 +29,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RSSItem" rowHeight="112" id="Th9-PN-YeA" customClass="NewsTableViewCell" customModule="Newsflash" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RSSItem" rowHeight="112" id="Th9-PN-YeA" customClass="NewsTableViewCell" customModule="NewsSeconds" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="600" height="112"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Th9-PN-YeA" id="WXI-MM-gk5">
@@ -188,7 +188,7 @@
                                                         </connections>
                                                     </switch>
                                                 </subviews>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="qH3-P8-omx" firstAttribute="leading" secondItem="C8f-zK-QYh" secondAttribute="leading" constant="62" id="9cC-8Y-PRn"/>
                                                     <constraint firstItem="qH3-P8-omx" firstAttribute="top" secondItem="C8f-zK-QYh" secondAttribute="top" constant="85" id="Anc-fO-j9b"/>
@@ -222,7 +222,7 @@
                                                         </connections>
                                                     </switch>
                                                 </subviews>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="PW0-4O-YHa" firstAttribute="leading" secondItem="1uI-x0-78O" secondAttribute="leading" constant="62" id="A7I-6s-318"/>
                                                     <constraint firstAttribute="height" constant="200" id="BPj-Bd-o4x"/>
@@ -358,7 +358,7 @@
         <!--ArticleView-->
         <scene sceneID="1Z3-SZ-0VP">
             <objects>
-                <viewController restorationIdentifier="ArticleView" storyboardIdentifier="ArticleView" title="Detail" id="hYV-ou-pKN" userLabel="ArticleView" customClass="ArticleViewController" customModule="Newsflash" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="ArticleView" storyboardIdentifier="ArticleView" title="Detail" id="hYV-ou-pKN" userLabel="ArticleView" customClass="ArticleViewController" customModule="NewsSeconds" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1ak-YA-xl9"/>
                         <viewControllerLayoutGuide type="bottom" id="Wal-dQ-z5y"/>

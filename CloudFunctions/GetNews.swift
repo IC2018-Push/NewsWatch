@@ -19,8 +19,8 @@ import Foundation
 import SwiftyJSON
 
 // Watson translator Credentials
-let translatorUsername = "Watson translator username"
-let translatorPassword = "Watson translator password"
+let translatorUsername = "84da088a-4464-44d6-ba2b-c79a9dd4d662"
+let translatorPassword = "yGkiu5TwHMSC"
 
 //News API Key
 let newsAPIKey = "7a563830-7222-466c-8b84-ca23b29aab8f"

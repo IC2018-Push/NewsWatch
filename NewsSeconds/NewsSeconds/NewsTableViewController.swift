@@ -292,21 +292,23 @@ class NewsTableViewController: UITableViewController {
     func pollOffers() {
         
         do {
-            if try AppLaunch.sharedInstance.isFeatureEnabled(featureCode: "_lyyy2dnj4") {
+            if try AppLaunch.sharedInstance.isFeatureEnabled(featureCode: "_13l8sw8bj") {
                
-                let buttonColor = try AppLaunch.sharedInstance.getPropertyofFeature(featureCode: "_lyyy2dnj4", propertyCode: "_7d164vjy1")
-                
+                let buttonColor = try AppLaunch.sharedInstance.getPropertyofFeature(featureCode: "_13l8sw8bj", propertyCode: "_f7pqeiun1")
+                let navBarColor = try AppLaunch.sharedInstance.getPropertyofFeature(featureCode: "_13l8sw8bj", propertyCode: "_a9eohkoep")
                 self.tableView.separatorColor = hexStringToUIColor(buttonColor)
                 self.settingsButton.tintColor = hexStringToUIColor(buttonColor)
                 self.reloadButton.tintColor = hexStringToUIColor(buttonColor)
                 self.locationSelector.tintColor = hexStringToUIColor(buttonColor)
                 self.indicatorColor = hexStringToUIColor(buttonColor)
+                self.navigationController?.navigationBar.barTintColor = hexStringToUIColor(navBarColor)
                 
             } else {
                 self.settingsButton.tintColor = hexStringToUIColor("#026FBA")
                 self.reloadButton.tintColor = hexStringToUIColor("#026FBA")
                 self.locationSelector.tintColor = hexStringToUIColor("#026FBA")
                 self.indicatorColor = UIColor.green
+                self.navigationController?.navigationBar.barTintColor = UIColor.white
                 if self.tableValue.count > 0 {
                     self.tableView.separatorColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1.0)
                 } else {

@@ -104,21 +104,24 @@ class SettingsViewController: UIViewController {
         }
         sourceButton.setTitle(chooseArticleDropDown.dataSource[appDelegate.sourceID], for: .normal)
         pollOffers()
+       
     }
     
     
     func pollOffers() {
         
         do {
-            if try AppLaunch.sharedInstance.isFeatureEnabled(featureCode: "_lyyy2dnj4") {
+            if try AppLaunch.sharedInstance.isFeatureEnabled(featureCode: "_13l8sw8bj") {
                 
-                 let backgroundColor = try AppLaunch.sharedInstance.getPropertyofFeature(featureCode: "_lyyy2dnj4", propertyCode: "_g3ka8rs3m")
+                 let backgroundColor = try AppLaunch.sharedInstance.getPropertyofFeature(featureCode: "_13l8sw8bj", propertyCode: "_hp84d7uab")
+                let navBarColor = try AppLaunch.sharedInstance.getPropertyofFeature(featureCode: "_13l8sw8bj", propertyCode: "_a9eohkoep")
                 self.view.backgroundColor = hexStringToUIColor(backgroundColor)
                 sourceButton.isHidden = false
                 languageButton.isHidden = false
                 customLabel.isHidden = true
                 countryLabel.isHidden = false
                 typeLabel.isHidden = false
+                self.navigationController?.navigationBar.barTintColor = hexStringToUIColor(navBarColor)
             } else {
                 sourceButton.isHidden = true
                 languageButton.isHidden = true
@@ -126,6 +129,7 @@ class SettingsViewController: UIViewController {
                 typeLabel.isHidden = true
                 customLabel.isHidden = false
                 self.view.backgroundColor = UIColor.white
+                self.navigationController?.navigationBar.barTintColor = UIColor.white
             }
             
         } catch {

@@ -18,14 +18,14 @@ import Foundation
 import SwiftyJSON
 
 //Push Service credentials
-let appSecret = " PuPush Servicsh AppSecret"
-let clientSecret = "Push Servic Clientsecret"
-let appID = "Push Servich appGUID"
-let appRegion = "push App region"  
+let appSecret = "b6bf9b02-261a-4e3b-bbe2-886aacabf959"
+let clientSecret = "59188899-6a99-47aa-8cbc-31fd1364c929"
+let appID = "21e0805e-f57c-4077-a5f9-172a2ca0b451"
+let appRegion = ".ng.bluemix.net"  
 
 // Watson translator Credentials
-let translatorUsername = "Watson translator username"
-let translatorPassword = "Watson translator password"
+let translatorUsername = "84da088a-4464-44d6-ba2b-c79a9dd4d662"
+let translatorPassword = "yGkiu5TwHMSC"
 
 //News API Key
 let newsAPIKey = "7a563830-7222-466c-8b84-ca23b29aab8f"
